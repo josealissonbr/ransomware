@@ -29,10 +29,6 @@ while True:
         with open('config/filekey.key', 'rb') as filekey:
             key = filekey.read()
 
-        status = 'sim'.encode()
-        with open('config/wasEncripted.txt', 'wb') as wasEncripted:
-            wasEncripted.write(status)
-
     def zip_folderPyzipper(folder_path, output_path):
         """Zip the contents of an entire folder (with that folder included
         in the archive). Empty subfolders will be included in the archive
