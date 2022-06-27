@@ -113,4 +113,4 @@ def obtemInformacao():
 
 
 obtemInformacao()
-# oreifreiç
+#
