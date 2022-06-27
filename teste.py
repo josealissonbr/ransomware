@@ -113,3 +113,4 @@ def obtemInformacao():
 
 
 obtemInformacao()
+# oreifreiç
