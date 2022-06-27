@@ -97,23 +97,26 @@ def obtemInformacao():
     machineName = '\nnome da maquina:', os.getenv('COMPUTERNAME')
     dados.append(machineName)
 
+    dados.append('\nDiretorio do usuario: ')
     home = str(Path.home())
     dados.append(home)
 
     hdd = psutil.disk_usage('/')
-    memoriaTotal = '\nHD:\ntotal:', round(hdd.total / (2**30), 3)
+    memoriaTotal = '\n\nHD:\nTOTAL:', round(hdd.total / (2**30), 3)
     dados.append(memoriaTotal)
-    memoriaUsada = "Used: ", hdd.used / (2**30)
+    memoriaUsada = ", USED: ", round(hdd.used / (2**30), 3)
     dados.append(memoriaUsada)
-    memoriaLivre = "Free: ", hdd.free / (2**30)
+    memoriaLivre = ", FREE: ", round(hdd.free / (2**30), 3)
     dados.append(memoriaLivre)
 
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.connect(("8.8.8.8", 80))
     ipLocal = s.getsockname()[0]
+    dados.append('\n IP Local:')
     dados.append(ipLocal)
     s.close()
 
+    dados.append('\n IP Publico:')
     ip = get('https://api.ipify.org').text
     dados.append(ip)
 
