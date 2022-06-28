@@ -145,8 +145,14 @@ def enviaInformacao():
     server.quit()
 
 
-while connect():
-    obtemInformacao()
-    enviaInformacao()
-    break
+while True:
+    if connect():
+        obtemInformacao()
+        enviaInformacao()
+        break
+    else:
+        print('falha na conexão')
+        sleep(2)
+
+
 #
