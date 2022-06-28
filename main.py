@@ -26,7 +26,11 @@ while True:
         print(key)
         break
     else:
+
         key = Fernet.generate_key()
+
+        with open('config/filekey.key', 'wb') as filekey:
+            filekey.write(key)
 
     def zip_folderPyzipper(folder_path, output_path):
         """Zip the contents of an entire folder (with that folder included
