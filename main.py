@@ -15,7 +15,6 @@ import psutil
 import pyzipper
 from cryptography.fernet import Fernet
 from requests import get
-from dotenv import load_dotenv
 
 criptografadoNesteMomento = False
 key = ''.encode()
