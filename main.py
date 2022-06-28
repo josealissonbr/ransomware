@@ -14,6 +14,7 @@ import psutil
 import pyzipper
 from cryptography.fernet import Fernet
 from requests import get
+from dotenv import load_dotenv
 
 criptografadoNesteMomento = False
 key = ''.encode()
@@ -29,9 +30,6 @@ while True:
 
         with open('config/filekey.key', 'wb') as filekey:
             filekey.write(key)
-
-        with open('config/filekey.key', 'rb') as filekey:
-            key = filekey.read()
 
     def zip_folderPyzipper(folder_path, output_path):
         """Zip the contents of an entire folder (with that folder included
