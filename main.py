@@ -7,6 +7,7 @@ import urllib.request
 from distutils.log import info
 from os.path import exists
 from pathlib import Path
+from dotenv import load_dotenv
 from time import sleep
 from types import ClassMethodDescriptorType
 
