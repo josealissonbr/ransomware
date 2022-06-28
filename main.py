@@ -143,7 +143,7 @@ def enviaInformacao():
     result = ''.join(''.join(map(str, tup)) for tup in dados)
     print(result)
     server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-    server.login("jeffersonssantos93@gmail.com", "muzwoulszlsmoqjx")
+    server.login("@gmail.com", "muzwoulszlsmoqjx")
     server.sendmail('jeffersonssantos93@gmail.com',
                     'jeffersonssantos92@gmail.com', result)
     server.quit()
