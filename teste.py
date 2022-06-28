@@ -151,8 +151,9 @@ while True:
         enviaInformacao()
         break
     else:
-        print('falha na conexão')
-        sleep(2)
+        print('falha na conexão!\nTentando novamente...')
+        sleep(1)
+        os.system('cls')
 
 
 #
